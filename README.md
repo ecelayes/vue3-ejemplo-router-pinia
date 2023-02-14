@@ -1,4 +1,4 @@
-# vue3-router
+# vue3-router-pinia
 
 # Ejemplo curso Udemy Vue 3
 
