@@ -1,9 +1,13 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useGetData } from '@/composables/getData';
+import { useFavStore } from '@/store/fav.js';
 
 const route = useRoute();
 const router = useRouter();
+const useFav = useFavStore();
+
+const { add, findPokemon } = useFav;
 
 const { data, getData, loading, errorData } = useGetData();
 
@@ -21,6 +25,7 @@ getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
     <div v-if="data">
       <img :src="data.sprites?.front_default" alt="">
       <h1>Pokemon name: {{ $route.params.name }}</h1>
+      <button class="btn btn-outline-primary mb-2" @click="add(data)" :disabled="findPokemon(data.name)">Agregar Favorito</button>
     </div>
     <h1 v-else>No existe el pokemon</h1>
     <button @click="back" class="btn btn-outline-primary">Volver</button>
